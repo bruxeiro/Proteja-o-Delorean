@@ -57,4 +57,6 @@
 
 ---
 
-> **Divirta-se e proteja o Delorean e a sua cabeça, para salvar o espaço tempo!**
+> **Divirta-se e proteja o Delorean (e a sua cabeça), para salvar o espaço tempo!**
+
+*Создано: @bruxeiro*
