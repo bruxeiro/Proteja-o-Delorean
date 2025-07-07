@@ -9,7 +9,7 @@ class EntityFactory:
     @staticmethod
     def create(entity_type, **kw):
         if entity_type == 'player':
-            # use provided img_path
+            # Usa a imagem do sprite baseado no input
             return Player(kw['x'], kw['y'], kw['controls'], kw['img_path'])
         if entity_type in ('enemy_ground', 'enemy_flying'):
             return Enemy(entity_type, kw['x'], kw['y'])

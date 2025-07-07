@@ -1,9 +1,14 @@
+#CONFIGURAÇÔES GERAIS
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 FPS = 60
 MASTER_VOLUME = 0.1
 
+#CAMINHOS PARA IMAGENS E SONS
+#Caminho base para os assets
 ASSET_PATH = 'assets/'
+
+#Caminhos para imagens
 PLAYER1_IMG = ASSET_PATH + 'Player1.png'
 PLAYER2_IMG = ASSET_PATH + 'Player2.png'
 ENEMY_GROUND_IMG = ASSET_PATH + 'EnemyGround.png'
@@ -15,8 +20,10 @@ BACKGROUND_IMG = ASSET_PATH + 'Background.png'
 LIFE_HEART_IMG = ASSET_PATH + 'LifeHeart.png'
 BACKGROUND_IMG_MENU = ASSET_PATH + 'BackgroundMenu.png'
 
+#Caminho base para os sons
 SOUND_PATH = ASSET_PATH + 'sounds/'
 
+#Caminhos para sons
 MENU_MUSIC = SOUND_PATH + 'MenuMusic.mp3'
 GAME_MUSIC = SOUND_PATH + 'GameMusic.mp3'
 SHOOT_SOUND = SOUND_PATH + 'Shoot.mp3'
@@ -27,14 +34,13 @@ HEART_DROP_SOUND = SOUND_PATH + 'HeartDrop.mp3'
 PLAYER_HURT_SOUND = SOUND_PATH + 'PlayerHurt.mp3'
 GAME_START_SOUND = SOUND_PATH + 'GameStart.mp3'
 
-
-
+#CONFIGURAÇÕES DO JOGO
+# Velocidades dos jogadores, tiros e inimigos
 PLAYER_SPEED = 5
 SHOT_SPEED = 7
 ENEMY_SPEED = 2
 ENEMY_SHOT_SPEED = 4
-
 SPAWN_INTERVAL = 2000
-LIFE_INTERVAL = 30000  # ms between giving extra life
+LIFE_INTERVAL = 30000 
 PLAYER_LIVES = 3
 
