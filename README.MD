@@ -28,15 +28,18 @@
 
 ## Controles
 
+
 * **Jogador 1**:
 
   * Mover: `W` (cima), `S` (baixo), `A` (esquerda), `D` (direita)
   * Atirar: `SPACE`
+  * Mire: `MOUSE`
 
 * **Jogador 2** (modo cooperativo):
 
   * Mover: `SETAS` (cima, baixo, esquerda, direita)
   * Atirar: `ENTER`
+  * Mire: `MOUSE`
 
 * **Menu**:
 
