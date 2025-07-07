@@ -7,6 +7,7 @@ from .DBProxy import DBProxy
 class Game:
     def __init__(self):
         pygame.init()
+        pygame.mixer.init()
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         pygame.display.set_caption('Proteja o Delorean')
         self.db = DBProxy()
@@ -42,7 +43,15 @@ class Game:
 
     def run(self):
         while True:
+            pygame.mixer.music.load(MENU_MUSIC)
+            pygame.mixer.music.play(-1)
+            pygame.mixer.music.set_volume(MASTER_VOLUME)
+
             players = Menu(self.screen).run()
+            pygame.mixer.music.load(GAME_MUSIC)
+            pygame.mixer.music.play(-1)
+            pygame.mixer.music.set_volume(0.05)
+           
             score = Level(self.screen, players).run()
             pygame.time.wait(500)
             self.screen.fill((0,0,0))

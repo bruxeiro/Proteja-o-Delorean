@@ -12,6 +12,9 @@ class Level:
     def init_objects(self):
         pygame.time.set_timer(pygame.USEREVENT+1, SPAWN_INTERVAL)
         pygame.time.set_timer(pygame.USEREVENT+2, LIFE_INTERVAL)
+        self.hit_sound = pygame.mixer.Sound(PLAYER_HIT_SOUND)
+        self.heart_drop_sound=pygame.mixer.Sound(HEART_DROP_SOUND)
+        self.heart_pick_sound=pygame.mixer.Sound(HEART_PICK_SOUND)
         from .Score import Score
         self.score = Score()
         self.players = pygame.sprite.Group()
@@ -44,7 +47,7 @@ class Level:
                 if event.type == pygame.USEREVENT+1:
                     etype = 'enemy_ground' if randint(0, 1) == 0 else 'enemy_flying'
                     x = randint(50, SCREEN_WIDTH - 50)
-                    # spawn flying enemy slightly below top edge
+                    # arrumar o inimigo nascendo fora da tela
                     if etype == 'enemy_ground':
                         y = SCREEN_HEIGHT - 50
                     else:
@@ -57,6 +60,8 @@ class Level:
                     heart = EntityFactory.create('life_heart', x=self.car.rect.centerx, y=self.car.rect.centery)
                     self.hearts.add(heart)
                     self.all_sprites.add(heart)
+                    self.heart_drop_sound.play()
+                    self.heart_drop_sound.set_volume(0.1)
             # input & update
             keys = pygame.key.get_pressed()
             for p in self.players:
@@ -73,11 +78,15 @@ class Level:
                 hits = pygame.sprite.spritecollide(p, self.enemy_shots, True)
                 if hits:
                     p.lives -= len(hits)
+                    self.hit_sound.play()
+                    self.hit_sound.set_volume(0.2)
                     if p.lives <= 0:
                         p.kill()
                 heart_hits = pygame.sprite.spritecollide(p, self.hearts, True)
                 if heart_hits:
                     p.lives += len(heart_hits)
+                    self.heart_pick_sound.play()
+                    self.heart_pick_sound.set_volume(MASTER_VOLUME)
             # draw
             self.draw()
             if len(self.players) == 0:
@@ -88,6 +97,7 @@ class Level:
 
     def draw(self):
         bg = pygame.image.load(BACKGROUND_IMG).convert()
+        bg = pygame.transform.scale(bg, (SCREEN_WIDTH, SCREEN_HEIGHT))
         self.screen.blit(bg, (0, 0))
         # draw behind
         self.car.draw(self.screen)

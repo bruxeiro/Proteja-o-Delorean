@@ -1,3 +1,4 @@
+import pygame
 from .Entity import Entity
 from .Const import *
 
@@ -9,6 +10,7 @@ class Enemy(Entity):
         self.speed = ENEMY_SPEED
         self.dir = 1  # horizontal oscillation direction
         self.last_shot = 0
+        self.death_sound = pygame.mixer.Sound(ENEMY_HIT_SOUND)
 
     def update(self, now, shots_group):
         # movement: both ground and flying enemies oscillate horizontally
@@ -24,3 +26,8 @@ class Enemy(Entity):
             else:
                 shots_group.add(EnemyShot(self.rect.centerx, self.rect.bottom, direction=1))
             self.last_shot = now
+        
+    def kill(self):
+        self.death_sound.play()
+        self.death_sound.set_volume(MASTER_VOLUME)
+        super().kill()

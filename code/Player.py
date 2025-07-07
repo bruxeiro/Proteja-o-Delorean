@@ -1,6 +1,6 @@
 import pygame
 from .Entity import Entity
-from .Const import PLAYER_SPEED, SHOT_SPEED, SCREEN_WIDTH, SCREEN_HEIGHT, PLAYER_LIVES
+from .Const import PLAYER_SPEED, SHOT_SPEED, SCREEN_WIDTH, SCREEN_HEIGHT, PLAYER_LIVES, SHOOT_SOUND, MASTER_VOLUME
 from pygame.math import Vector2
 
 class Player(Entity):
@@ -9,6 +9,7 @@ class Player(Entity):
         self.controls = controls
         self.lives = PLAYER_LIVES
         self.last_shot = 0
+        self.shoot_sound = pygame.mixer.Sound(SHOOT_SOUND)
 
     def update(self, keys, now, shots_group):
         # horizontal movement
@@ -37,4 +38,6 @@ class Player(Entity):
                 direction = direction.normalize() * SHOT_SPEED
             from .PlayerShot import PlayerShot
             shots_group.add(PlayerShot(self.rect.centerx, self.rect.centery, direction))
+            self.shoot_sound.play()
+            self.shoot_sound.set_volume(MASTER_VOLUME)
             self.last_shot = now
